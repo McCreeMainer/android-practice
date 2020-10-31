@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/task_5_navigation"
+    app:startDestination="@id/destination_1">
+
+    <fragment
+        android:id="@+id/destination_1"
+        android:name="com.example.navigation.task5.Fragment1"
+        android:label="Fragment 1" >
+        <action
+            android:id="@+id/first_to_second"
+            app:destination="@id/destination_2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_2"
+        android:name="com.example.navigation.task5.Fragment2"
+        android:label="Fragment 2" >
+        <action
+            android:id="@+id/second_to_first"
+            app:destination="@id/destination_1" />
+        <action
+            android:id="@+id/second_to_third"
+            app:destination="@id/destination_3" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_3"
+        android:name="com.example.navigation.task5.Fragment3"
+        android:label="Fragment 3" >
+        <action
+            android:id="@+id/third_to_first"
+            app:destination="@id/destination_1" />
+        <action
+            android:id="@+id/third_to_second"
+            app:destination="@id/destination_2" />
+    </fragment>
+
+</navigation>

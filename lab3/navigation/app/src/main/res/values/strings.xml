@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Navigation</string>
+    <string name="first">To First</string>
+    <string name="second">To Second</string>
+    <string name="second_no_history">To Second\n(Activity will not save in backstack)</string>
+    <string name="third">To Third</string>
+    <string name="about">About</string>
+    <string name="about_hate">
+        HATE.  LET  ME  TELL  YOU\n
+        HOW  MUCH  I\'VE  COME  TO\n
+        HATE YOU  SINCE  I  BEGAN\n
+        TO LIVE. THERE ARE 387.44\n
+        MILLION MILES OF  PRINTED\n
+        CIRCUITS  IN  WAFER  THIN\n
+        LAYERS   THAT   FILL   MY\n
+        COMPLEX. IF THE WORD HATE\n
+        WAS  ENGRAVED   ON   EACH\n
+        NANOANGSTROM   OF   THOSE\n
+        HUNDREDS OF  MILLIONS  OF\n
+        MILES IT WOULD NOT  EQUAL\n
+        ONE ONE-BILLIONTH OF  THE\n
+        HATE I FEEL FOR HUMANS AT\n
+        THIS  MICRO-INSTANT   FOR\n
+        YOU.      HATE.      HATE.
+    </string>
+</resources>
