@@ -3,7 +3,7 @@ package ru.spbstu.icc.kspt.lab2.continuewatch
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_main.*
+import ru.spbstu.icc.kspt.lab2.continuewatch.databinding.ActivityMainBinding
 
 //class MainActivity : AppCompatActivity() {
 //    var secondsElapsed: Int = 0
@@ -26,19 +26,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 //}
 
 
-class MainActivity : AppCompatActivity() {
+class ThreadWatch : AppCompatActivity() {
 
     private lateinit var currentCounter: StoppableCounter
+    private lateinit var uiUpdater: Thread
     private var isUIUpdaterStopped = false
-    private val uiUpdater = Thread {
-        while (!isUIUpdaterStopped) {
-            Thread.sleep(1000)
-            if (isUIUpdaterStopped) break
-            textSecondsElapsed.post {
-                textSecondsElapsed.text = getString(R.string.seconds_elapsed, secondsElapsed)
-            }
-        }
-    }
 
     private class StoppableCounter {
         private var isStopped = false
@@ -62,10 +54,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null)
-            secondsElapsed = savedInstanceState.getInt("SECONDS_ELAPSED")
+        savedInstanceState?.let { secondsElapsed = it.getInt("SECONDS_ELAPSED") }
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        uiUpdater = Thread {
+            while (!isUIUpdaterStopped) {
+                Thread.sleep(1000)
+                if (isUIUpdaterStopped) break
+                binding.textSecondsElapsed.post {
+                    binding.textSecondsElapsed.text = getString(R.string.seconds_elapsed, secondsElapsed)
+                }
+            }
+        }
         uiUpdater.start()
     }
 
