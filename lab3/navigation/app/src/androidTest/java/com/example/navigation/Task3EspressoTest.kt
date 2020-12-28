@@ -1,18 +1,24 @@
 package com.example.navigation
 
+import android.content.Intent
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.NoActivityResumedException
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import com.example.navigation.task3.Activity1
 import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.Test
+
+import org.junit.Assert.assertThrows
 
 
 /**
@@ -22,6 +28,20 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class Task3EspressoTest {
+
+    private fun testActivityNoExistence() {
+        onView(withId(R.id.activity1_app_bar)).check(doesNotExist())
+        onView(withId(R.id.activity1_layout)).check(doesNotExist())
+
+        onView(withId(R.id.activity2_app_bar)).check(doesNotExist())
+        onView(withId(R.id.activity2_layout)).check(doesNotExist())
+
+        onView(withId(R.id.activity3_app_bar)).check(doesNotExist())
+        onView(withId(R.id.activity3_layout)).check(doesNotExist())
+
+        onView(withId(R.id.activity_about_app_bar)).check(doesNotExist())
+        onView(withId(R.id.activity_about_layout)).check(doesNotExist())
+    }
 
     private fun testActivity1Existence() {
         onView(withId(R.id.activity1_app_bar)).check(matches(isDisplayed()))
@@ -104,7 +124,7 @@ class Task3EspressoTest {
     }
 
     @get:Rule
-    val scenarioRule = ActivityScenarioRule(Activity1::class.java)
+    val testRule = ActivityScenarioRule(Activity1::class.java)
 
     @Test
     fun testTransition123() {
@@ -159,4 +179,16 @@ class Task3EspressoTest {
         pressBack()
         testActivity2Existence()
     }
+
+    @Test
+    fun testBackStack2() {
+        onView(withId(R.id.button1)).perform(click())
+        onView(withId(R.id.button2)).perform(click())
+        onView(withId(R.id.about_button)).perform(click())
+        pressBack()
+        pressBack()
+        pressBack()
+        assertThrows("", NoActivityResumedException::class.java, Espresso::pressBack)
+    }
+
 }
