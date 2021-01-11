@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit
 class AsyncTaskWatch : AppCompatActivity() {
 
     private lateinit var counterTask: CounterTask
-    private var isUIUpdaterStopped = false
 
     class CounterTask(private val changeUI: () -> Unit) : AsyncTask<Unit, Unit, Unit>() {
         override fun doInBackground(vararg params: Unit?) {
@@ -37,9 +36,7 @@ class AsyncTaskWatch : AppCompatActivity() {
         setContentView(binding.root)
 
         counterTask = CounterTask {
-            binding.textSecondsElapsed.post {
-                binding.textSecondsElapsed.text = getString(R.string.seconds_elapsed, secondsElapsed++)
-            }
+            binding.textSecondsElapsed.text = getString(R.string.seconds_elapsed, secondsElapsed++)
         }
     }
 
@@ -51,11 +48,6 @@ class AsyncTaskWatch : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         counterTask.cancel(false)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        isUIUpdaterStopped = true
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

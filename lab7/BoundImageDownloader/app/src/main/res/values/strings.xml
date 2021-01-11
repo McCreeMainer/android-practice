@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BoundImageDownloader</string>
+    <string name="location">Image location: %s</string>
+    <string name="start_service">Start Service</string>
+    <string name="send_request">Send Request</string>
+    <string name="no_img">No image</string>
+</resources>

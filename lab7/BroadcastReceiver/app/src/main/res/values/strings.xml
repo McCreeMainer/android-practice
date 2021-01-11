@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BroadcastReceiver</string>
+    <string name="no_img">No image</string>
+    <string name="location">Image location: %s</string>
+</resources>
